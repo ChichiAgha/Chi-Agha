@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Exciting GitHub Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            padding: 100px 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.2);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.25);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float-random 15s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        .interactive-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .color-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .color-circle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px currentColor;
+        }
+
+        .footer {
+            padding: 50px 0;
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+            100% { text-shadow: 0 0 30px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.3); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes float-random {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-30px) translateX(20px); }
+            50% { transform: translateY(-10px) translateX(-15px); }
+            75% { transform: translateY(-25px) translateX(10px); }
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-placeholder {
+            font-size: 4rem;
+            opacity: 0.7;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 25px;
+            color: white;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        /* Resume Section */
+        .resume-section {
+            padding: 100px 0;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .resume-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .download-cv {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .cv-button, .linkedin-button {
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .cv-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .linkedin-button {
+            background: linear-gradient(45deg, #0077b5, #00a0dc);
+        }
+
+        .cv-button:hover, .linkedin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .skills-section h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -23px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .timeline-content {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Sandbox Section */
+        .sandbox-section {
+            padding: 100px 0;
+            background: rgba(0,0,0,0.15);
+        }
+
+        .sandbox-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .sandbox-tabs {
+            display: flex;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tab:last-child {
+            border-right: none;
+        }
+
+        .tab.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .sandbox-content {
+            height: 400px;
+            position: relative;
+        }
+
+        .code-editor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .code-editor.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .code-editor textarea {
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            border: none;
+            color: white;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+        }
+
+        .preview-pane {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .preview-pane.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .preview-pane iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .sandbox-actions {
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .run-code-btn, .reset-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .run-code-btn {
+            background: linear-gradient(45deg, #43e97b, #38f9d7);
+            color: white;
+        }
+
+        .reset-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .run-code-btn:hover, .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Quick Navigation */
+        .quick-nav {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .quick-nav a {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .resume-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sandbox-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1 1 50%;
+            }
+            
+            .quick-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>Welcome to the Future</h1>
+            <p>Experience cutting-edge web design with stunning visuals, smooth animations, and interactive elements that bring your GitHub Pages to life.</p>
+            <a href="#features" class="cta-button" onclick="smoothScroll('#features')">Explore Magic</a>
+            <div class="quick-nav">
+                <a href="#projects" onclick="smoothScroll('#projects')">Projects</a>
+                <a href="#resume" onclick="smoothScroll('#resume')">Resume</a>
+                <a href="#sandbox" onclick="smoothScroll('#sandbox')">Sandbox</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Amazing Features</h2>
+            <p class="section-subtitle">Discover what makes this page stand out from the crowd</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed and performance with modern web technologies</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Stunning Visuals</h3>
+                    <p>Beautiful gradients, animations, and effects that captivate your audience</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Fully Responsive</h3>
+                    <p>Perfect experience across all devices, from mobile to desktop</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Explore my latest work and creative solutions</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">Live Demo</a>
+                                <a href="#" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                        <div class="project-placeholder">🚀</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>AI-Powered Web App</h3>
+                        <p>A sophisticated machine learning application built with React and TensorFlow.js</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">Live Demo</a>
+                                <a href="#" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                        <div class="project-placeholder">🎨</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Creative Portfolio</h3>
+                        <p>An interactive portfolio showcasing modern design principles and animations</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">Live Demo</a>
+                                <a href="#" class="project-link">GitHub</a>
+                            </div>
+                        </div>
+                        <div class="project-placeholder">📱</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Mobile-First Platform</h3>
+                        <p>A responsive web application optimized for mobile experiences</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">PWA</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="resume-section" id="resume">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtitle">My journey through technology and innovation</p>
+            
+            <div class="resume-content">
+                <div class="resume-left">
+                    <div class="download-cv">
+                        <a href="#" class="cv-button" onclick="downloadCV()">
+                            📄 Download CV
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" class="linkedin-button" target="_blank">
+                            💼 LinkedIn Profile
+                        </a>
+                    </div>
+                    
+                    <div class="skills-section">
+                        <h3>Technical Skills</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <div class="skill-name">JavaScript</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">React</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">Python</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-name">Node.js</div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resume-right">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Senior Full Stack Developer</h4>
+                                <p class="company">Tech Innovations Inc. • 2023 - Present</p>
+                                <p>Leading development of scalable web applications and mentoring junior developers</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Frontend Developer</h4>
+                                <p class="company">Digital Solutions Ltd. • 2021 - 2023</p>
+                                <p>Developed responsive user interfaces and improved application performance by 40%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Junior Developer</h4>
+                                <p class="company">StartUp Ventures • 2020 - 2021</p>
+                                <p>Built modern web applications using React and collaborated in agile teams</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sandbox-section" id="sandbox">
+        <div class="container">
+            <h2 class="section-title">Code Sandbox</h2>
+            <p class="section-subtitle">Interactive coding environment - try it out!</p>
+            
+            <div class="sandbox-container">
+                <div class="sandbox-tabs">
+                    <div class="tab active" onclick="showTab('html')">HTML</div>
+                    <div class="tab" onclick="showTab('css')">CSS</div>
+                    <div class="tab" onclick="showTab('js')">JavaScript</div>
+                    <div class="tab" onclick="showTab('preview')">Preview</div>
+                </div>
+                
+                <div class="sandbox-content">
+                    <div class="code-editor active" id="html-editor">
+                        <textarea placeholder="Write your HTML here...">&lt;div class="demo-box"&gt;
+  &lt;h2&gt;Hello, World!&lt;/h2&gt;
+  &lt;p&gt;Edit the code to see changes!&lt;/p&gt;
+  &lt;button onclick="changeColor()"&gt;Change Color&lt;/button&gt;
+&lt;/div&gt;</textarea>
+                    </div>
+                    
+                    <div class="code-editor" id="css-editor">
+                        <textarea placeholder="Write your CSS here...">.demo-box {
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  color: white;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.demo-box button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}</textarea>
+                    </div>
+                    
+                    <div class="code-editor" id="js-editor">
+                        <textarea placeholder="Write your JavaScript here...">function changeColor() {
+  const box = document.querySelector('.demo-box');
+  const colors = [
+    'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+    'linear-gradient(45deg, #667eea, #764ba2)',
+    'linear-gradient(45deg, #f093fb, #f5576c)',
+    'linear-gradient(45deg, #43e97b, #38f9d7)'
+  ];
+  
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  box.style.background = randomColor;
+}</textarea>
+                    </div>
+                    
+                    <div class="preview-pane" id="preview">
+                        <iframe id="preview-frame" srcdoc=""></iframe>
+                    </div>
+                </div>
+                
+                <div class="sandbox-actions">
+                    <button class="run-code-btn" onclick="runCode()">▶ Run Code</button>
+                    <button class="reset-btn" onclick="resetCode()">🔄 Reset</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interactive-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Elements</h2>
+            <p class="section-subtitle">Click the colors below to change the page theme!</p>
+            
+            <div class="color-palette">
+                <div class="color-circle" style="background: linear-gradient(45deg, #667eea, #764ba2);" onclick="changeTheme('default')"></div>
+                <div class="color-circle" style="background: linear-gradient(45deg, #f093fb, #f5576c);" onclick="changeTheme('pink')"></div>
+                <div class="color-circle" style="background: linear-gradient(45deg, #4facfe, #00f2fe);" onclick="changeTheme('blue')"></div>
+                <div class="color-circle" style="background: linear-gradient(45deg, #43e97b, #38f9d7);" onclick="changeTheme('green')"></div>
+                <div class="color-circle" style="background: linear-gradient(45deg, #fa709a, #fee140);" onclick="changeTheme('sunset')"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Your Amazing GitHub Page. Built with ❤️ and modern web technologies.</p>
+            <p>Ready to create your own? Start building on GitHub Pages today!</p>
+        </div>
+    </footer>
+
+    <script>
+        function smoothScroll(target) {
+            const element = document.querySelector(target);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function changeTheme(theme) {
+            const body = document.body;
+            
+            const themes = {
+                default: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                pink: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                blue: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                green: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                sunset: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+            };
+            
+            body.style.background = themes[theme];
+            
+            // Add a subtle animation effect
+            body.style.transition = 'background 0.5s ease';
+        }
+
+        // Add some interactive particle effects on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.style.position = 'fixed';
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.width = '10px';
+            cursor.style.height = '10px';
+            cursor.style.background = 'rgba(255,255,255,0.3)';
+            cursor.style.borderRadius = '50%';
+            cursor.style.pointerEvents = 'none';
+            cursor.style.animation = 'fade-out 1s ease-out forwards';
+            cursor.style.zIndex = '1000';
+            
+            document.body.appendChild(cursor);
+            
+            setTimeout(() => {
+                cursor.remove();
+            }, 1000);
+        });
+        
+        // Add fade-out animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fade-out {
+                0% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(2);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
